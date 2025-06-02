@@ -197,6 +197,17 @@ The recommended method for connecting Loki to AWS S3 is to use an IAM role. This
     ```
     **Make sure to replace the placeholder with your AWS account ID.**
 
+
+  Note: we can skip steps 4,5 and 6 by using eksctl cli 
+
+  ```bash
+    eksctl create podidentityassociation \
+      --service-account-name loki \
+      --namespace loki \
+      --cluster hosted-infra-us-east-2 --region us-east-2 \
+      --permission-policy-arns arn:aws:iam::440082503234:policy/LokiS3AccessPolicy
+  ```
+
 ## Deploying the Helm chart
 
 Before we can deploy the Loki Helm chart, we need to add the Grafana chart repository to Helm. This repository contains the Loki Helm chart.
